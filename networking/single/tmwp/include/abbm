@@ -1,0 +1,31 @@
+#include<wrapper>
+#include<string.h>
+#include<map>
+namespace abbm
+{
+class TMWebProjector
+{
+private:
+int portNumber;
+char *url;
+char *rsc;
+void (*ptrOnRequest)(Request &request,Response &response);
+class stringComparator
+{
+public:
+bool operator()(string *left,string *right)
+{
+return strcmp(left->c_str(),right->c_str())>0;
+}
+};
+map<string *,void (*)(Request &,Response &),stringComparator> mp;
+public:
+TMWebProjector(int portNumber);
+void start();
+~TMWebProjector();
+string getUrl();
+int ResourceCheck(string &resource);
+void setUrl(const char *url);
+void onRequest(const char *url,void (*ptrOnRequest)(Request &request,Response &response)); 
+};
+}

@@ -1,0 +1,10 @@
+class Request
+{
+private:
+
+public:
+};
+class Response
+{
+
+};

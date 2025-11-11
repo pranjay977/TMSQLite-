@@ -1,0 +1,16 @@
+#ifndef __$_studentInfo_$
+#define __$_studentInfo_$ 1234
+#include<iostream>
+using namespace std;
+class studInfo
+{
+private:
+string rollNumber;
+string name;
+public:
+void setRollNumber(string  &rollNumber);
+void setName(string &name);
+string getRollNumber();
+string getName();
+};
+#endif

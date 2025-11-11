@@ -1,0 +1,16 @@
+<DOCKTYPE HTML>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>
+great website
+</title>
+</head>
+<body>
+<h1>
+${physics}
+${chemistry}
+${maths}
+</h1>
+</body>
+</html>

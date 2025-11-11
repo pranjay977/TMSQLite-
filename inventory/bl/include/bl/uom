@@ -1,0 +1,33 @@
+#ifndef __$__uom__bl 
+#define __$__uom__bl 1234
+using namespace std;
+#include<bl/iuom>
+#include<string>
+namespace inventory
+{
+namespace business_layer
+{
+class UnitOfMeasurement:public abc::IUnitOfMeasurement
+{
+string title;
+int code;
+public:
+UnitOfMeasurement();
+UnitOfMeasurement(const UnitOfMeasurement &other);
+UnitOfMeasurement(int code,string title);
+virtual ~UnitOfMeasurement();
+void setCode(int code);
+int getCode() const;
+void setTitle(string title);
+string getTitle() const;
+IUnitOfMeasurement & operator=(const IUnitOfMeasurement &other);
+int operator==(const IUnitOfMeasurement &other);
+int operator!=(const IUnitOfMeasurement &other);
+int operator<(const IUnitOfMeasurement &other);
+int operator>(const IUnitOfMeasurement &other);
+int operator<=(const IUnitOfMeasurement &other);
+int operator>=(const IUnitOfMeasurement &other);
+};
+}
+}
+#endif

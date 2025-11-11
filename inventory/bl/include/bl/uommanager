@@ -1,0 +1,53 @@
+#ifndef __$__umanager__bl 
+#define __$__umanager__bl 1234
+using namespace std;
+#include<forward_list>
+#include<bl/iuom>
+#include<bl/uom>
+#include<bl/iuommanager>
+#include<map>
+using namespace std;
+namespace inventory
+{
+namespace business_layer
+{
+class UnitOfMeasurementTitleComparator
+{
+public:
+bool operator()(string *left,string *right);
+};
+class UnitOfMeasurementManager:public abc::IUnitOfMeasurementManager 
+{                                 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+private:            
+class _UnitOfMeasurement
+{
+public:
+int code;
+string *title;
+};
+class DataModel
+{
+public:
+map<int,_UnitOfMeasurement *> codeWiseMap;
+map<string *,_UnitOfMeasurement *,UnitOfMeasurementTitleComparator> titleWiseMap;
+DataModel();
+~DataModel();
+void populateDataStructure();
+};
+static DataModel dataModel;
+public:
+UnitOfMeasurementManager();
+void addUnitOfMeasurement(abc::IUnitOfMeasurement *unitOfMeasurement) noexcept(false);
+void updateUnitOfMeasurement(abc::IUnitOfMeasurement *unitOfMeasurement) noexcept(false);
+void removeUnitOfMeasurementByCode(int code) noexcept(false);
+void removeUnitOfMeasurementByTitle(string &title) noexcept(false);
+abc::IUnitOfMeasurement *getUnitOfMeasurementByCode(int code) noexcept(false);
+abc::IUnitOfMeasurement *getUnitOfMeasurementByTitle(string &title) noexcept(false);
+forward_list<abc::IUnitOfMeasurement *> *getUnitOfMeasurements() noexcept(false);
+int unitOfMeasurementCodeExists(int code) noexcept(false);
+int unitOfMeasurementTitleExists(string &title) noexcept(false);
+int getUnitOfMeasurementCount() noexcept(false);
+};
+}
+}
+#endif

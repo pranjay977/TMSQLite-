@@ -1,0 +1,31 @@
+#ifndef __$__iuomdao__dl
+#define __$__iuomdao__dl 1234
+#include<iostream>
+#include<dl/iuom>
+#include<dl/uom>
+#include<forward_list>
+#include<dl/daoexception>
+namespace inventory
+{
+namespace data_layer
+{
+namespace abc
+{
+class IUnitOfMeasurementDAO
+{
+public:
+static string FILE_NAME;
+virtual void add(IUnitOfMeasurement *unitOfMeasurement) noexcept(false)=0;
+virtual void remove(int code) noexcept(false)=0;
+virtual void update(IUnitOfMeasurement *unitOfMeasurement) noexcept(false)=0;
+virtual int getCount() noexcept(false)=0;
+virtual int codeExists(int code) noexcept(false)=0;
+virtual int titleExists(string title) noexcept(false)=0;
+virtual IUnitOfMeasurement * getByCode(int code) noexcept(false)=0;
+virtual IUnitOfMeasurement  * getByTitle(string title) noexcept(false)=0;
+virtual forward_list<IUnitOfMeasurement *> * getAll() noexcept(false)=0;
+};
+}
+}
+}
+#endif
