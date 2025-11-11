@@ -1,0 +1,52 @@
+#ifndef __$__tmsqlite__$ 
+#define __$__tmsqlite__$ 1234
+#include<iostream>
+#include<map> 
+#include<sqlite3.h>
+using namespace std;
+namespace sqlite
+{
+class sqliteDB
+{
+private:
+sqlite3 *db;
+char *errorMessage;
+sqlite3_stmt *stmt;
+int resultCode;
+string sql;
+public:
+sqliteDB();
+void open(const string &fileName) noexcept(false);
+void executeUpdate(const string &statementString) noexcept(false);
+void executeInsert(const string &statementString) noexcept(false);
+void executeDelete(const string &statementString) noexcept(false);
+sqlite3_stmt * selectRows(const string &statementString) noexcept(false);
+void close() noexcept(false);
+int getLastGeneratedRowId() noexcept(false);
+};
+class Rows
+{
+private:
+sqlite3_stmt *rowsStatement;
+map<string,void *> mp;
+int columnCount;
+public:
+Rows();
+Rows(sqlite3_stmt *stmt) noexcept(false);
+void operator=(sqlite3_stmt *stmt) noexcept(false);
+int hasMoreRows() noexcept(false);
+map<string,void *> * getRow() noexcept(false);
+};
+class row
+{
+private:
+map<string,void *> mp;
+
+public:
+void operator=(map<string,void*> *mp) noexcept(false);
+int getInt(const string &name) noexcept(false);
+string getString(const string &name) noexcept(false);
+double getDouble(const string &name) noexcept(false);
+};
+}
+#endif
