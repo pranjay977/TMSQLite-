@@ -18,39 +18,38 @@ TMSQLite wraps the raw `sqlite3` C API in a small set of C++ classes so you can 
 ## Example Usage
 
 ```cpp
-#include <tmsqlite>
-
+#include<tmsqlite>
+#include<string.h>
+#include<sqlite3.h>
+#include<iostream>
+#include<sqliteException>
+using namespace std;
 using namespace sqlite;
-
 int main()
 {
-    sqliteDB db;
-
-    try
-    {
-        db.open("mydatabase.db");
-
-        db.executeInsert("insert into users (name, age) values ('Alice', 30)");
-
-        sqlite3_stmt *stmt = db.selectRows("select name, age from users");
-        Rows rows(stmt);
-
-        while (rows.hasMoreRows())
-        {
-            row r;
-            r = rows.getRow();
-
-            std::cout << r.getString("name") << " is " << r.getInt("age") << " years old\n";
-        }
-
-        db.close();
-    }
-    catch (SQLiteException &e)
-    {
-        std::cerr << "Database error: " << e.what() << std::endl;
-    }
-
-    return 0;
+sqliteDB sqliteDB;
+char s_name[50],m;
+int s_id;
+string sql;
+char sql1[100];
+try
+{
+sqliteDB.open("school.db");
+cout<<"Enter school id:";
+cin>>s_id;
+while((m=getchar())!='\n');
+cout<<"Enter school name:";
+fgets(s_name,50,stdin);
+s_name[strlen(s_name)-1]='\0';
+sprintf(sql1,"insert into school values(%d,'%s');",s_id,s_name);
+sql=sql1;
+sqliteDB.executeInsert(sql);
+}catch(SQLiteException &sqliteException)
+{
+cout<<sqliteException.what()<<endl;
+}
+sqliteDB.close();
+return 0;
 }
 ```
 
@@ -64,7 +63,7 @@ int main()
 Link against the SQLite3 library when compiling, for example:
 
 ```bash
-g++ -std=c++11 your_program.cpp sqliteDB.cpp -lsqlite3 -o your_program
+g++  your_program.cpp -o your_program.exe -I ..\include c:\sqlite3\include -L ..\lib -L c:\sqlite3\lib -ltmsqlite -lsqlite3  
 ```
 
 ## Project Status
